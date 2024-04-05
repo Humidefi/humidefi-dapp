@@ -6,15 +6,44 @@
 </div>
 <div class="w-full mb-3">
     <div class="grid">
+        <div class="col-6 md:col-4 lg:col-2">
+            <div class="w-full">
+                <p-dropdown [options]="currency" [(ngModel)]="selectedCurrency" [filter]="true" filterBy="code"
+                    [styleClass]="'w-full text-2xl'" [showClear]="true" placeholder="Select Currency">
+                    <!-- (onChange)="selectCurrencyOnChange($event)" -->
+                    <ng-template pTemplate="selectedItem" let-selectedCurrency>
+                        <div class="flex align-items-center gap-2" *ngIf="selectedCurrency != undefined">
+                            <!-- <img src="./../../../assets/crypto/{{selectedCurrency.metadata.symbol}}.png"
+                                height="30" /> -->
+                            <div>
+                                {{ selectedCurrency.code}}
+                            </div>
+                        </div>
+                    </ng-template>
+                    <ng-template let-currency pTemplate="item">
+                        <div class="flex align-items-center gap-2">
+                            <!-- <img src="./../../../assets/crypto/{{asset.metadata.symbol}}.png"
+                                style="width: 30px" /> -->
+                            <div>{{ currency.code }}</div>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="w-full mb-3">
+    <div class="grid">
         <div class="col-12 md:col-12 lg:col-12">
             <p-panel header="Your Assets">
                 <div class="card">
                     <p-table [value]="userAssets" [tableStyle]="{ 'min-width': '50rem' }">
                         <ng-template pTemplate="header">
                             <tr>
-                                <th>Asset</th>
-                                <th>Symbol</th>
-                                <th>Balance</th>
+                                <th colspan="2">Token</th>
+                                <th>Quantity</th>
+                                <th>Value</th>
+                                <th>Amount</th>
                             </tr>
                         </ng-template>
                         <ng-template pTemplate="body" let-userasset>
@@ -24,12 +53,51 @@
                                         style="height: 50px;" />
                                 </td>
                                 <td style="width: 200px;">
-                                    <b><span style="font-size: 20px;">{{ userasset.asset_symbol }}</span></b> | {{
-                                    userasset.asset_name }}
+                                    <b><span style="font-size: 20px;">{{ userasset.asset_symbol }}</span></b>
                                 </td>
                                 <td>
                                     <span style="font-size: 20px;">
-                                        <b>{{ decimalPipe.transform(userasset.asset_balance) || "0" }}</b>
+                                        <b>{{ decimalPipe.transform(userasset.quantity) || "0" }}</b>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span style="font-size: 20px;">
+                                        <b>{{ decimalPipe.transform(userasset.value) || "0" }}</b>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span style="font-size: 20px;">
+                                        <b>{{ decimalPipe.transform(userasset.amount) || "0" }}</b>
+                                    </span>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </p-panel>
+        </div>
+    </div>
+</div>
+<div class="w-full mb-3">
+    <div class="grid">
+        <div class="col-6 md:col-6 lg:col-6">
+            <p-panel header="Liquidity Portfolio">
+                <div class="card">
+                    <p-table [value]="accountLiquidityPools" [tableStyle]="{ 'min-width': '25rem' }">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>Pool</th>
+                                <th >Quantity</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-accountLiquidityPool>
+                            <tr>
+                                <td style="font-size: 20px;">
+                                    <b><span style="font-size: 20px;">{{getAssetDetail(accountLiquidityPool.assetPairs.assetX).metadata.symbol}}/{{getAssetDetail(accountLiquidityPool.assetPairs.assetY).metadata.symbol}} </span></b>
+                                </td>
+                                <td>
+                                    <span style="font-size: 20px;">
+                                        <b>{{ decimalPipe.transform(accountLiquidityPool.lpTokenBalance) || "0" }}</b>
                                     </span>
                                 </td>
                             </tr>

@@ -13,7 +13,7 @@
                         <div class="col-12 md:col-8 lg:col-7">
                             <p-inputNumber [styleClass]="'w-full swap-form-input-field'" class="w-full"
                                 [minFractionDigits]="0" [maxFractionDigits]="18" [placeholder]="'0.00'"></p-inputNumber>
-                            <div class="w-full mt-3">
+                            <!-- <div class="w-full mt-3">
                                 <button type="button" pButton class="p-button p-button-secondary p-button-sm mr-1">
                                     Max (100%)
                                 </button>
@@ -26,7 +26,7 @@
                                 <button type="button" pButton class="p-button p-button-secondary p-button-sm">
                                     25%
                                 </button>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="col-12 md:col-4 lg:col-5">
                             <div class="w-full">
@@ -70,6 +70,12 @@
                 </button>
             </div>
             <div class="w-full mb-3">
+                <p-accordion>
+                    <p-panel header="Calculations">
+                    </p-panel>
+                </p-accordion>
+            </div>
+            <div class="w-full mb-3">
                 <p-panel header="You Receive">
                     <div class="grid">
                         <div class="col-12 md:col-8 lg:col-7">
@@ -110,18 +116,10 @@
                 </p-panel>
             </div>
             <div class="w-full mb-3">
-                <p-button label="Swap" [styleClass]="'w-full'" [rounded]="true" [size]="'large'"></p-button>
+                <p-button label="Submit" [styleClass]="'w-full'" [rounded]="true" [size]="'large'"></p-button>
             </div>
         </div>
-        <div class="col-12 md:col-6 lg:col-5">
-            <div class="w-full mb-3">
-                <p-accordion>
-                    <p-panel header="Calculations">
 
-                    </p-panel>
-                </p-accordion>
-            </div>
-        </div>
     </div>
 </div>
 
