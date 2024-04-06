@@ -6,6 +6,7 @@
 html,
 body {
     margin: 0px;
+    font-size: 14px;
 }
 
 .p-menubar {
@@ -23,4 +24,12 @@ body {
     font-size: 1.5rem;
     width: 100%;
     margin-bottom: 10px;
+}
+
+.app-header-page {
+    padding: 20px 25px 20px 25px;
+}
+
+.app-body-page {
+    padding: 25px;
 }

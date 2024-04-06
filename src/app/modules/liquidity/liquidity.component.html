@@ -1,232 +1,116 @@
-<div class="w-full mb-3">
+<div class="app-header-page w-full surface-ground">
     <div class="page-title">
-        <span><i class="pi pi-fw pi-database" style="font-size: 1.3rem;"></i>&nbsp;Liquidity</span>
+        <span style="font-size: 1.5rem;">
+            <i class="pi pi-fw pi-database" style="font-size: 1.5rem;"></i>
+            Liquidity
+        </span>
     </div>
     <p-breadcrumb class="max-w-full" [model]="breadcrumbItems" [home]="breadcrumbHome"></p-breadcrumb>
 </div>
-<div class="w-full mb-3">
-    <p-toolbar>
-        <div class="p-toolbar-group-start">
-            <span class="p-input-icon-left">
-                <i class="pi pi-search"></i>
-                <input pInputText placeholder="Search" />
-            </span>
-        </div>
-        <div class="p-toolbar-group-center"></div>
-        <div class="p-toolbar-group-end">
-            <button type="button" pButton class="p-button p-button-rounded mr-2" (click)="openLiquidityFormModal()">
-                Create Pool
-            </button>
-            <button type="button" pButton class="p-button p-button-rounded" (click)="openExistingLiquidityPoolsModal()">
-                Provide Liquidity
-            </button>
-        </div>
-    </p-toolbar>
-</div>
-<div *ngIf="accountLiquidityPools.length > 0">
-    <div *ngFor="let accountLiquidityPool of accountLiquidityPools" class="w-full mb-3">
-        <p-panel
-            header="{{getAssetDetail(accountLiquidityPool.assetPairs.assetX).metadata.symbol}} | {{getAssetDetail(accountLiquidityPool.assetPairs.assetY).metadata.symbol}}">
-            <div class="grid">
-                <div class="col-12 md:col-6 lg:col-6">
-                    <p-panel header="Your Liquidity">
-                        <table class="w-full">
-                            <tr>
-                                <td style="width: 90px;" class="p-3">
-                                    <img src="../../../assets/crypto/{{getAssetDetail(accountLiquidityPool.assetPairs.assetX).metadata.symbol}}.png"
-                                        class="w-full" />
-                                </td>
-                                <td>
-                                    <span
-                                        style="font-size: 15px;">{{getAssetDetail(accountLiquidityPool.assetPairs.assetX).metadata.name}}</span>
-                                    <br />
-                                    <span style="font-size: 25px;">
-                                        <b>
-                                            {{decimalPipe.transform(accountLiquidityPool.assetXBalance) || "0"}}
-                                            {{getAssetDetail(accountLiquidityPool.assetPairs.assetX).metadata.symbol}}
-                                        </b>
-                                    </span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="width: 90px;" class="p-3">
-                                    <img src="../../../assets/crypto/{{getAssetDetail(accountLiquidityPool.assetPairs.assetY).metadata.symbol}}.png"
-                                        class="w-full" />
-                                </td>
-                                <td>
-                                    <span
-                                        style="font-size: 15px;">{{getAssetDetail(accountLiquidityPool.assetPairs.assetY).metadata.name}}</span>
-                                    <br />
-                                    <span style="font-size: 25px;">
-                                        <b>
-                                            {{decimalPipe.transform(accountLiquidityPool.assetYBalance) || "0"}}
-                                            {{getAssetDetail(accountLiquidityPool.assetPairs.assetY).metadata.symbol}}
-                                        </b>
-                                    </span>
-                                </td>
-                            </tr>
-                        </table>
-                    </p-panel>
-                </div>
-                <div class="col-12 md:col-6 lg:col-6">
-                    <p-panel header="Liquidity Token and rewards">
-                        <table class="w-full">
-                            <tr>
-                                <td style="width: 90px;" class="p-3">
-                                    <img src="../../../assets/crypto/UMI.png" class="w-full" />
-                                </td>
-                                <td>
-                                    <span style="font-size: 15px;">Humidefi Token</span>
-                                    <br />
-                                    <span style="font-size: 25px;">
-                                        <b>{{decimalPipe.transform(accountLiquidityPool.lpTokenBalance) || "0"}} UMI</b>
-                                    </span>
-                                </td>
-                            </tr>
-                        </table>
-                    </p-panel>
-                    <br />
-                    <button type="button" pButton class="p-button p-button-success p-button-rounded w-full">
-                        <div class="w-full text-center">
-                            Redeem
+<div class="app-body-page">
+    <div class="w-full mb-3">
+        <div class="grid">
+            <div class="col-6 md:col-4 lg:col-3">
+                <p-dropdown [options]="currencies" [(ngModel)]="selectedCurrency" [filter]="true" filterBy="code"
+                    [styleClass]="'w-full text-2xl'" placeholder="Select Currency">
+                    <ng-template pTemplate="selectedItem" let-selectedCurrency>
+                        <div class="flex align-items-center gap-2" *ngIf="selectedCurrency != undefined">
+                            <img src="./../../../assets/currencies/{{selectedCurrency.code}}.png" style="width: 20px" />
+                            {{ selectedCurrency.code}}
                         </div>
-                    </button>
-                </div>
+                    </ng-template>
+                    <ng-template let-currency pTemplate="item">
+                        <div class="flex align-items-center gap-2">
+                            <img src="./../../../assets/currencies/{{currency.code}}.png" style="width: 20px" />
+                            <div>{{ currency.code }}</div>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
             </div>
-            <ng-template pTemplate="icons">
-                <b>Transaction Index:</b> {{accountLiquidityPool.index}}
-            </ng-template>
-        </p-panel>
+            <div class="col-6 md:col-4 lg:col-9">
+
+            </div>
+        </div>
+    </div>
+    <div class="w-full mb-3">
+        <div class="grid">
+            <div class="col-12 md:col-12 lg:col-12">
+                <p-panel header="Liquidity Pool">
+                    <div class="card">
+                        <p-table [value]="liquidityPools" [paginator]="true" [rows]="10"
+                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                            [showCurrentPageReport]="true" [rowsPerPageOptions]="[10, 50, 100]"
+                            styleClass="p-datatable-striped p-datatable-sm" [responsive]="true"
+                            [tableStyle]="{ 'min-width': '10rem' }">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>Asset Pair</th>
+                                    <th></th>
+                                    <th>Quantity</th>
+                                    <th>APY</th>
+                                    <th>Duration</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-liquiditypool>
+                                <tr>
+                                    <td style="min-width: 120px; width: 120px;">
+                                        <div class="mt-1">
+                                            <p-chip [styleClass]="'mr-2'"
+                                                label="{{getAssetDetail(liquiditypool.assetPair.assetX).metadata.symbol}}"
+                                                image="./../../../assets/crypto/{{getAssetDetail(liquiditypool.assetPair.assetX).metadata.symbol}}.png"></p-chip>
+                                            <p-chip
+                                                label="{{getAssetDetail(liquiditypool.assetPair.assetY).metadata.symbol}}"
+                                                image="./../../../assets/crypto/{{getAssetDetail(liquiditypool.assetPair.assetY).metadata.symbol}}.png"></p-chip>
+                                        </div>
+                                    </td>
+                                    <td style="min-width: 200px; width: 200px;">
+                                        <button pButton class="p-button p-button-sm p-button p-button-rounded mr-1">
+                                            <div class="w-full text-center">
+                                                Add
+                                            </div>
+                                        </button>
+                                        <button pButton class="p-button p-button-sm p-button p-button-success p-button-rounded">
+                                            <div class="w-full text-center">
+                                                Redeem
+                                            </div>
+                                        </button>
+                                    </td>
+                                    <td style="min-width: 100px; width: 100px;">
+                                        <span>
+                                            {{ decimalPipe.transform(liquiditypool.lpTokenBalance) || "0" }}
+                                        </span>
+                                    </td>
+                                    <td style="min-width: 100px; width: 100px;">
+                                        <span>
+                                            {{ decimalPipe.transform(0) || "0" }}
+                                        </span>
+                                    </td>
+                                    <td style="min-width: 100px; width: 100px;">
+                                        <span>
+                                            {{ decimalPipe.transform(0) || "0" }}
+                                        </span>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </p-panel>
+            </div>
+        </div>
     </div>
 </div>
 
-<p-dialog header="Provide Liquidity" [(visible)]="showLiquidityFormModal" [modal]="true" [style]="{ width: '45vw' }"
+<p-dialog header="Provide Liquidity" [(visible)]="showNewLiquidityModal" [modal]="true" [style]="{ width: '45vw' }"
     [draggable]="false" [resizable]="false">
-    <div class="w-full mb-3">
-        <p-panel header="Asset X">
-            <div class="grid">
-                <div class="col-12 md:col-8 lg:col-7">
-                    <p-inputNumber [styleClass]="'w-full liquidity-form-input-field'" class="w-full"
-                        [minFractionDigits]="0" [maxFractionDigits]="18" [placeholder]="'0.00'"
-                        [(ngModel)]="liquidityData.assetXBalance"></p-inputNumber>
-                </div>
-                <div class="col-12 md:col-4 lg:col-5">
-                    <div class="w-full">
-                        <p-dropdown [options]="assets" [(ngModel)]="selectedAssetX" [filter]="true"
-                            filterBy="metadata.symbol" [styleClass]="'w-full text-4xl'" placeholder="Select Token"
-                            (onChange)="selectAssetOnChange($event)" [readonly]="!isForNewLiquidityPool">
-                            <ng-template pTemplate="selectedItem">
-                                <div class="flex align-items-center gap-2" *ngIf="selectedAssetX != undefined">
-                                    <img src="./../../../assets/crypto/{{selectedAssetX.metadata.symbol}}.png"
-                                        height="30" />
-                                    <div class="text-4xl">
-                                        {{ selectedAssetX.metadata.symbol }}
-                                    </div>
-                                </div>
-                            </ng-template>
-                            <ng-template let-asset pTemplate="item">
-                                <div class="flex align-items-center gap-2">
-                                    <img src="./../../../assets/crypto/{{asset.metadata.symbol}}.png"
-                                        style="width: 30px" />
-                                    <div><b>{{ asset.metadata.symbol }}</b> ({{ asset.metadata.name }})</div>
-                                </div>
-                            </ng-template>
-                        </p-dropdown>
-                    </div>
-                </div>
-            </div>
-            <ng-template pTemplate="footer">
-                <b>Balance:</b>
-                {{decimalPipe.transform(assetXBalances != undefined ? assetXBalances.balance : 0, "1.5-5") || "0"}}
-                <b>{{assetXBalances != undefined ? assetXBalances.asset.metadata.symbol : ''}}</b>
-            </ng-template>
-        </p-panel>
-    </div>
-    <div class="w-full">
-        <p-panel header="Asset Y">
-            <div class="grid">
-                <div class="col-12 md:col-8 lg:col-7">
-                    <p-inputNumber [styleClass]="'w-full liquidity-form-input-field'" class="w-full"
-                        [minFractionDigits]="0" [maxFractionDigits]="18" [placeholder]="'0.00'"
-                        [(ngModel)]="liquidityData.assetYBalance"></p-inputNumber>
-                </div>
-                <div class="col-12 md:col-4 lg:col-5">
-                    <div class="w-full">
-                        <p-dropdown [options]="assets" [(ngModel)]="selectedAssetY" [filter]="true"
-                            filterBy="metadata.symbol" [styleClass]="'w-full text-4xl'" placeholder="Select Token"
-                            (onChange)="selectAssetOnChange($event)" [readonly]="!isForNewLiquidityPool">
-                            <ng-template pTemplate="selectedItem">
-                                <div class="flex align-items-center gap-2" *ngIf="selectedAssetY != undefined">
-                                    <img src="./../../../assets/crypto/{{selectedAssetY.metadata.symbol}}.png"
-                                        height="30" />
-                                    <div class="text-4xl">
-                                        {{ selectedAssetY.metadata.symbol }}
-                                    </div>
-                                </div>
-                            </ng-template>
-                            <ng-template let-asset pTemplate="item">
-                                <div class="flex align-items-center gap-2">
-                                    <img src="./../../../assets/crypto/{{asset.metadata.symbol}}.png"
-                                        style="width: 30px" />
-                                    <div><b>{{ asset.metadata.symbol }}</b> ({{ asset.metadata.name }})</div>
-                                </div>
-                            </ng-template>
-                        </p-dropdown>
-                    </div>
-                </div>
-            </div>
-            <ng-template pTemplate="footer">
-                <b>Balance:</b>
-                {{decimalPipe.transform(assetYBalances != undefined ? assetYBalances.balance : 0, "1.5-5") || "0"}}
-                <b>{{assetYBalances != undefined ? assetYBalances.asset.metadata.symbol : ''}}</b>
-            </ng-template>
-        </p-panel>
-    </div>
+
     <ng-template pTemplate="footer">
         <button pButton class="p-button p-button-rounded w-full" [disabled]="isProcessing"
-            (click)="createLiquidityPoolExtrinsic()">
+            (click)="newLiquidityExtrinsic()">
             <div class="w-full text-center">
                 Create
             </div>
         </button>
     </ng-template>
-</p-dialog>
-
-<p-dialog header="Select Existing Pool" [(visible)]="showExistingLiquidityPoolsModal" [modal]="true"
-    [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
-    <div class="mb-3">
-        <span class="p-input-icon-left">
-            <i class="pi pi-search"></i>
-            <input pInputText placeholder="Search" />
-        </span>
-    </div>
-    <p-table [value]="existingLiquidityPools" selectionMode="single" [(selection)]="selectedExistingLiquidityPool"
-        (onRowSelect)="openLiquidityFormModalFromSelectedLiquidityPool(selectedExistingLiquidityPool)"
-        dataKey="lpToken">
-        <ng-template pTemplate="body" let-liquiditypool>
-            <tr [pSelectableRow]="liquiditypool">
-                <td width="70" style="text-align: center;">
-                    <img src="./../../../assets/crypto/{{getAssetDetail(liquiditypool.assetPairs.assetX).metadata.symbol}}.png"
-                        class="w-full" />
-                </td>
-                <td width="200">
-                    <b>{{getAssetDetail(liquiditypool.assetPairs.assetX).metadata.symbol}}</b>
-                    <br />
-                    {{getAssetDetail(liquiditypool.assetPairs.assetX).metadata.name}}
-                </td>
-                <td width="70" style="text-align: center;">
-                    <img src="./../../../assets/crypto/{{getAssetDetail(liquiditypool.assetPairs.assetY).metadata.symbol}}.png"
-                        class="w-full" />
-                </td>
-                <td width="200">
-                    <b>{{getAssetDetail(liquiditypool.assetPairs.assetY).metadata.symbol}}</b>
-                    <br />
-                    {{getAssetDetail(liquiditypool.assetPairs.assetY).metadata.name}}
-                </td>
-                <td></td>
-            </tr>
-        </ng-template>
-    </p-table>
 </p-dialog>
 
 <p-dialog [(visible)]="showProcessModal" [style]="{width: '60vw'}" [modal]="true" [closable]="false">

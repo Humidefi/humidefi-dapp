@@ -18,6 +18,7 @@ import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
+import { ChipModule } from 'primeng/chip';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
@@ -50,6 +51,7 @@ import { LiquidityComponent } from './liquidity.component';
     ButtonModule,
     TableModule,
     DialogModule,
+    ChipModule,
     ProgressSpinnerModule,
     ProgressBarModule,
     ConfirmDialogModule,

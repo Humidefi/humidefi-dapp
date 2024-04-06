@@ -1,10 +1,13 @@
-<div class="w-full mb-3">
+<div class="app-header-page w-full surface-ground">
     <div class="page-title">
-        <span><i class="pi pi-fw pi-arrow-right-arrow-left" style="font-size: 1.3rem;"></i>&nbsp;Swap</span>
+        <span style="font-size: 1.5rem;">
+            <i class="pi pi-fw pi-arrow-right-arrow-left" style="font-size: 1.5rem;"></i>
+            Swap
+        </span>
     </div>
     <p-breadcrumb class="max-w-full" [model]="breadcrumbItems" [home]="breadcrumbHome"></p-breadcrumb>
 </div>
-<div class="w-full mb-3">
+<div class="app-body-page">
     <div class="grid">
         <div class="col-12 md:col-6 lg:col-7">
             <div class="w-full mb-3">
@@ -31,13 +34,13 @@
                         <div class="col-12 md:col-4 lg:col-5">
                             <div class="w-full">
                                 <p-dropdown [options]="assets" [(ngModel)]="selectedAssetX" [filter]="true"
-                                    filterBy="metadata.symbol" [styleClass]="'w-full text-4xl'"
+                                    filterBy="metadata.symbol" [styleClass]="'w-full text-2xl'"
                                     placeholder="Select Token" (onChange)="selectAssetOnChange($event)">
                                     <ng-template pTemplate="selectedItem">
                                         <div class="flex align-items-center gap-2" *ngIf="selectedAssetX != undefined">
                                             <img src="./../../../assets/crypto/{{selectedAssetX.metadata.symbol}}.png"
-                                                height="30" />
-                                            <div class="text-4xl">
+                                                height="20" />
+                                            <div class="text-2xl">
                                                 {{ selectedAssetX.metadata.symbol }}
                                             </div>
                                         </div>
@@ -62,7 +65,7 @@
                 </p-panel>
             </div>
             <div class="w-full mb-3 text-center">
-                <button pButton class="p-button-success p-button-outlined p-button-rounded w-full"
+                <button pButton class="p-button-success p-button-outlined p-button-rounded"
                     (click)="switchToken()">
                     <div class="w-full text-center">
                         <i class="pi pi-fw pi-sort-alt"></i> Switch
@@ -85,13 +88,13 @@
                         <div class="col-12 md:col-4 lg:col-5">
                             <div class="w-full">
                                 <p-dropdown [options]="assets" [(ngModel)]="selectedAssetY" [filter]="true"
-                                    filterBy="metadata.symbol" [styleClass]="'w-full text-4xl'"
+                                    filterBy="metadata.symbol" [styleClass]="'w-full text-2xl'"
                                     placeholder="Select Token" (onChange)="selectAssetOnChange($event)">
                                     <ng-template pTemplate="selectedItem">
                                         <div class="flex align-items-center gap-2" *ngIf="selectedAssetY != undefined">
                                             <img src="./../../../assets/crypto/{{selectedAssetY.metadata.symbol}}.png"
-                                                height="30" />
-                                            <div class="text-4xl">
+                                                height="20" />
+                                            <div class="text-2xl">
                                                 {{ selectedAssetY.metadata.symbol }}
                                             </div>
                                         </div>

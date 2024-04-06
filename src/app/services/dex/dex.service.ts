@@ -6,7 +6,7 @@ import { AccountLiquidityPoolModel } from '../../models/account-liquidity-pool.m
 import { Observable, Subject } from 'rxjs';
 import { web3FromAddress } from '@polkadot/extension-dapp';
 import { LiquidityPoolModel } from '../../models/liquidity-pool.model';
-import { AssetPairsModel } from '../../models/assets.model';
+import { AssetPairModel } from '../../models/assets.model';
 
 @Injectable({
   providedIn: 'root'
@@ -39,16 +39,20 @@ export class DexService {
 
           if (results.length > 0) {
             for (let i = 0; i < results.length; i++) {
-              let assetPairs: AssetPairsModel = {
-                assetX: results[i].assetPairs.assetX,
-                assetY: results[i].assetPairs.assetY,
+              let assetPair: AssetPairModel = {
+                assetX: results[i].assetPair.assetX,
+                assetY: results[i].assetPair.assetY,
               }
 
               liquidityPools.push({
-                assetPairs: assetPairs,
+                assetPair: assetPair,
                 assetXBalance: results[i].assetXBalance,
                 assetYBalance: results[i].assetYBalance,
-                lpToken: results[i].lpToken
+                price: results[i].price,
+                assetXFee: results[i].assetXFee,
+                assetYFee: results[i].assetYFee,
+                lpToken: results[i].lpToken,
+                lpTokenBalance: results[i].lpTokenBalance,
               });
             }
           }
@@ -77,16 +81,20 @@ export class DexService {
         response => {
           let results: any = response;
 
-          let assetPairs: AssetPairsModel = {
-            assetX: results.assetPairs.assetX,
-            assetY: results.assetPairs.assetY,
+          let assetPair: AssetPairModel = {
+            assetX: results.assetPair.assetX,
+            assetY: results.assetPair.assetY,
           }
 
           liquidityPool = {
-            assetPairs: assetPairs,
+            assetPair: assetPair,
             assetXBalance: results.assetXBalance,
             assetYBalance: results.assetYBalance,
-            lpToken: results.lpToken
+            price: results.price,
+            assetXFee: results.assetXFee,
+            assetYFee: results.assetYFee,
+            lpToken: results.lpToken,
+            lpTokenBalance: results.lpTokenBalance,
           };
 
           observer.next(liquidityPool);
@@ -116,14 +124,13 @@ export class DexService {
           if (results.length > 0) {
             for (let i = 0; i < results.length; i++) {
               accountLiquidityPools.push({
-                index: results[i].index,
+                id: results[i].id,
                 accountId: results[i].accountId,
-                assetPairs: results[i].assetPairs,
+                assetPair: results[i].assetPair,
                 assetXBalance: results[i].assetXBalance,
                 assetYBalance: results[i].assetYBalance,
                 lpToken: results[i].lpToken,
                 lpTokenBalance: results[i].lpTokenBalance,
-                priceRatio: results[i].priceRatio,
               });
             }
           }
@@ -144,7 +151,7 @@ export class DexService {
     });
   }
 
-  public createLiquidityPoolExtrinsic(assetX: number, assetXBalance: number, assetY: number, assetYBalance: number): Observable<any> {
+  public newLiquidityExtrinsic(assetX: number, assetXBalance: number, assetY: number, assetYBalance: number): Observable<any> {
     return new Observable<any>((observer) => {
       let data = {
         assetX: assetX,
@@ -153,7 +160,7 @@ export class DexService {
         assetYBalance: assetYBalance
       }
 
-      this.httpClient.post(this.defaultApiEndpoint + "/api/dex/extrinsic/create-liquidity-pool", JSON.stringify(data), this.options).subscribe(
+      this.httpClient.post(this.defaultApiEndpoint + "/api/dex/extrinsic/new-liquidity", JSON.stringify(data), this.options).subscribe(
         response => {
           let results: any = response;
 
@@ -173,41 +180,13 @@ export class DexService {
     });
   }
 
-  public provideLiquidityExtrinsic(assetX: number, assetXBalance: number, assetY: number, assetYBalance: number): Observable<any> {
-    return new Observable<any>((observer) => {
-      let data = {
-        assetX: assetX,
-        assetXBalance: assetXBalance,
-        assetY: assetY,
-        assetYBalance: assetYBalance
-      }
-
-      this.httpClient.post(this.defaultApiEndpoint + "/api/dex/extrinsic/provide-liquidity", JSON.stringify(data), this.options).subscribe(
-        response => {
-          let results: any = response;
-
-          observer.next(results);
-          observer.complete();
-        },
-        error => {
-          if (error.status == 0) {
-            observer.error(error.message);
-          } else {
-            observer.error(error['error'].message);
-          }
-
-          observer.complete();
-        }
-      );
-    });
-  }
-
-  public redeemLiquidityExtrinsic(assetX: number, assetY: number, lpToken: number): Observable<any> {
+  public redeemLiquidityExtrinsic(assetX: number, assetY: number, lpToken: number, id: number): Observable<any> {
     return new Observable<any>((observer) => {
       let data = {
         assetX: assetX,
         assetY: assetY,
-        lpToken: lpToken
+        lpToken: lpToken,
+        id: id
       }
 
       this.httpClient.post(this.defaultApiEndpoint + "/api/dex/extrinsic/redeem-liquidity", JSON.stringify(data), this.options).subscribe(
@@ -267,6 +246,34 @@ export class DexService {
       }
 
       this.httpClient.post(this.defaultApiEndpoint + "/api/dex/extrinsic/swap-in-for-exact-out", JSON.stringify(data), this.options).subscribe(
+        response => {
+          let results: any = response;
+
+          observer.next(results);
+          observer.complete();
+        },
+        error => {
+          if (error.status == 0) {
+            observer.error(error.message);
+          } else {
+            observer.error(error['error'].message);
+          }
+
+          observer.complete();
+        }
+      );
+    });
+  }
+
+  public transferAssetExtrinsic(asset: number, assetBalance: number, accountId: number): Observable<any> {
+    return new Observable<any>((observer) => {
+      let data = {
+        asset: asset,
+        assetBalance: assetBalance,
+        accountId: accountId
+      }
+
+      this.httpClient.post(this.defaultApiEndpoint + "/api/dex/extrinsic/transfer-asset", JSON.stringify(data), this.options).subscribe(
         response => {
           let results: any = response;
 

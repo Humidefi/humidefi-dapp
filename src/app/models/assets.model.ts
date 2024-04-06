@@ -24,7 +24,7 @@ export class AssetMetadataModel {
     isFrozen: boolean = false;
 }
 
-export class AssetPairsModel {
+export class AssetPairModel {
     assetX: number = 0;
     assetY: number = 0;
 }

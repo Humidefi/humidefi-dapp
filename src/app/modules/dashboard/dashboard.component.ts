@@ -17,7 +17,6 @@ import { DexService } from '../../services/dex/dex.service';
 export class DashboardComponent {
   breadcrumbHome: MenuItem | undefined;
   breadcrumbItems: MenuItem[] | undefined;
-  currency: any[] | undefined;
 
   constructor(
     public decimalPipe: DecimalPipe,
@@ -26,6 +25,7 @@ export class DashboardComponent {
     private dexService: DexService
   ) { }
 
+  currencies: any[] | undefined;
   selectedCurrency: string | undefined;
 
   walletName = localStorage.getItem("wallet-meta-name") || "";
@@ -48,8 +48,11 @@ export class DashboardComponent {
           for (let i = 0; i < data.length; i++) {
             await this.getAssetBalanceByAcccount(data[i]);
           }
+
           this.assets = data;
         }
+
+        this.getAccountLiquidityPools();
       },
       error => {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: error });
@@ -90,28 +93,15 @@ export class DashboardComponent {
   }
 
   public getAccountLiquidityPools(): void {
-    console.log(this.accountLiquidityPools );
+    console.log(this.accountLiquidityPools);
     this.accountLiquidityPools = [];
     this.dexService.getAccountLiquidityPools().subscribe(
       result => {
         let data: any = result;
         if (data.length > 0) {
-          for (let i = 0; i < data.length; i++) {
-            this.accountLiquidityPools.push({
-              index: data[i].index,
-              accountId: data[i].accountId,
-              assetPairs: data[i].assetPairs,
-              assetXBalance: data[i].assetXBalance,
-              assetYBalance: data[i].assetYBalance,
-              lpToken: data[i].lpToken,
-              lpTokenBalance: data[i].lpTokenBalance,
-              priceRatio: data[i].priceRatio
-            });
-          }
-          console.log(this.accountLiquidityPools);
+          this.accountLiquidityPools = data;
+          this.accountLiquidityPools.sort((a, b) => (a.id < b.id ? -1 : 1));
         }
-
-        this.accountLiquidityPools.sort((a, b) => (a.index < b.index ? -1 : 1));
       },
       error => {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: error });
@@ -125,15 +115,15 @@ export class DashboardComponent {
       { label: 'Dashboard' }
     ];
 
-    this.currency = [
-      { name: 'Dollar', code: 'USD'}, 
-      {name: 'Phillipines', code: 'PHP'}
-     ]
+    this.currencies = [
+      { name: 'Dollar', code: 'USD' },
+      { name: 'Phillipines', code: 'PHP' }
+    ];
+    this.selectedCurrency = this.currencies[0];
 
     let url = location.origin + "/polkadot-identicon";
     this.iframeSrc = url;
 
     this.getAssets();
-    this.getAccountLiquidityPools();
   }
 }

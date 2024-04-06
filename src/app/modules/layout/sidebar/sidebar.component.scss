@@ -1,5 +1,5 @@
 .sidebar {
-    width: 300px;
+    width: 270px;
     height: 100%;
     color: white;
     transition: margin-left 0.3s;
@@ -9,7 +9,7 @@
 }
 
 .collapsed {
-    margin-left: -300px;
+    margin-left: -270px;
 }
 
 :host ::ng-deep .sidebar-menus {
@@ -23,7 +23,7 @@
 
 :host ::ng-deep .sidebar-menus a {
     background: #F43C70;
-    padding: 20px 0px 20px 42px;
+    padding: 20px 0px 20px 35px;
 }
 
 :host ::ng-deep .sidebar-menus a:active, 
@@ -33,6 +33,7 @@
 
 :host ::ng-deep .sidebar-menus a span {
     color: white !important;
+    font-size: 16px;
 }
 
 :host ::ng-deep .sidebar-menus a:hover {

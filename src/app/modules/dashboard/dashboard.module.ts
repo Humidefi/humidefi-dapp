@@ -5,9 +5,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { CardModule } from 'primeng/card';
 import { PanelModule } from 'primeng/panel';
-import { ChipModule } from 'primeng/chip';
 import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
+import { ChipModule } from 'primeng/chip';
+import { AvatarModule } from 'primeng/avatar';
+import { AvatarGroupModule } from 'primeng/avatargroup';
 import { DropdownModule } from 'primeng/dropdown';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ProgressBarModule } from 'primeng/progressbar';
@@ -32,9 +34,11 @@ import { DashboardComponent } from './dashboard.component';
     BreadcrumbModule,
     CardModule,
     PanelModule,
-    ChipModule,
     TableModule,
     DialogModule,
+    ChipModule,
+    AvatarModule,
+    AvatarGroupModule,
     DropdownModule,
     ProgressSpinnerModule,
     ProgressBarModule,

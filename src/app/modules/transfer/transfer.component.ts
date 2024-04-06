@@ -4,7 +4,6 @@ import { MessageService } from 'primeng/api';
 import { AssetModel, SelectedAssetModel } from '../../models/assets.model';
 import { AssetsService } from '../../services/assets/assets.service';
 import { DecimalPipe } from '@angular/common';
-import { DexService } from '../../services/dex/dex.service';
 import { ExecuteExtrinsicsStatusModel } from '../../models/execution-extrinsics-status.model';
 
 @Component({
@@ -135,7 +134,7 @@ export class TransferComponent {
   ngOnInit() {
     this.breadcrumbHome = { icon: 'pi pi-home', routerLink: '/app/dashboard' };
     this.breadcrumbItems = [
-      { label: 'Portfolio' },
+      { label: 'Dashboard' },
       { label: 'Transfer' }
     ];
 

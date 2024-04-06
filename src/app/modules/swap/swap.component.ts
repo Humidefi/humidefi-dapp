@@ -149,7 +149,7 @@ export class SwapComponent {
   ngOnInit() {
     this.breadcrumbHome = { icon: 'pi pi-home', routerLink: '/app/dashboard' };
     this.breadcrumbItems = [
-      { label: 'Portfolio' },
+      { label: 'Dashboard' },
       { label: 'Swap' }
     ];
 
