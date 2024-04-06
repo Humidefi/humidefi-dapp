@@ -63,20 +63,21 @@
                     </ng-template>
                 </p-panel>
             </div>
+            <div class="w-full mb-3">
+                <p-accordion>
+                    <p-panel header="Calculations">
+                    </p-panel>
+                </p-accordion>
+            </div>
             <div class="w-full mb-3 text-center">
                 <p-panel header="Destination Address">
                     <input type="text" pInputText [(ngModel)]="destinationAddress" class="w-full" />
                 </p-panel>
             </div>
             <div class="w-full mb-3">
-                <p-button label="Transfer" [styleClass]="'w-full'" [rounded]="true" [size]="'large'"
+                <p-button label="Submit" [styleClass]="'w-full'" [rounded]="true" [size]="'large'"
                     (onClick)="transferExtrinsics()"></p-button>
             </div>
-        </div>
-        <div class="col-12 md:col-6 lg:col-5">
-            <p-panel header="Calculations">
-
-            </p-panel>
         </div>
     </div>
 </div>

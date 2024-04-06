@@ -8,6 +8,7 @@ import { PanelModule } from 'primeng/panel';
 import { ChipModule } from 'primeng/chip';
 import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
+import { DropdownModule } from 'primeng/dropdown';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
@@ -34,6 +35,7 @@ import { DashboardComponent } from './dashboard.component';
     ChipModule,
     TableModule,
     DialogModule,
+    DropdownModule,
     ProgressSpinnerModule,
     ProgressBarModule,
     ConfirmDialogModule,
