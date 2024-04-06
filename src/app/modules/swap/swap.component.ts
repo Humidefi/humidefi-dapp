@@ -26,6 +26,9 @@ export class SwapComponent {
 
   keypair = localStorage.getItem("wallet-keypair") || "";
 
+  currencies: any[] | undefined;
+  selectedCurrency: string | undefined;
+
   assets: AssetModel[] = [];
   selectedAssetX: AssetModel | undefined;
   selectedAssetY: AssetModel | undefined;
@@ -152,6 +155,12 @@ export class SwapComponent {
       { label: 'Dashboard' },
       { label: 'Swap' }
     ];
+
+    this.currencies = [
+      { name: 'Dollar', code: 'USD' },
+      { name: 'Phillipines', code: 'PHP' }
+    ];
+    this.selectedCurrency = this.currencies[0];
 
     this.getAssets();
   }

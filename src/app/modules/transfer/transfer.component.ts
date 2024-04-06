@@ -24,6 +24,9 @@ export class TransferComponent {
 
   keypair = localStorage.getItem("wallet-keypair") || "";
 
+  currencies: any[] | undefined;
+  selectedCurrency: string | undefined;
+
   assets: AssetModel[] = [];
   selectedAsset: AssetModel | undefined;
 
@@ -137,6 +140,12 @@ export class TransferComponent {
       { label: 'Dashboard' },
       { label: 'Transfer' }
     ];
+
+    this.currencies = [
+      { name: 'Dollar', code: 'USD' },
+      { name: 'Phillipines', code: 'PHP' }
+    ];
+    this.selectedCurrency = this.currencies[0];
 
     this.getAssets();
   }

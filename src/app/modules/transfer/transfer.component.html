@@ -10,6 +10,28 @@
 <div class="app-body-page">
     <div class="w-full mb-3">
         <div class="grid">
+            <div class="col-6 md:col-4 lg:col-3">
+                <p-dropdown [options]="currencies" [(ngModel)]="selectedCurrency" [filter]="true" filterBy="code"
+                    [styleClass]="'w-full text-2xl'" placeholder="Select Currency">
+                    <ng-template pTemplate="selectedItem" let-selectedCurrency>
+                        <div class="flex align-items-center gap-2" *ngIf="selectedCurrency != undefined">
+                            <img src="./../../../assets/currencies/{{selectedCurrency.code}}.png" style="width: 20px" />
+                            {{ selectedCurrency.code}}
+                        </div>
+                    </ng-template>
+                    <ng-template let-currency pTemplate="item">
+                        <div class="flex align-items-center gap-2">
+                            <img src="./../../../assets/currencies/{{currency.code}}.png" style="width: 20px" />
+                            <div>{{ currency.code }}</div>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
+            </div>
+            <div class="col-6 md:col-4 lg:col-9"></div>
+        </div>
+    </div>
+    <div class="w-full mb-3">
+        <div class="grid">
             <div class="col-12 md:col-6 lg:col-7">
                 <div class="w-full mb-3">
                     <p-panel header="Select Token">
