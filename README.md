@@ -1,3 +1,5 @@
+<img src="https://raw.githubusercontent.com/Humidefi/humidefi-dapp/main/src/assets/img/humedifi_logo_light_mode.png" />
+
 # Humidefi DApp
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.0.
