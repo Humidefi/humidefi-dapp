@@ -14,7 +14,6 @@ Humidefi leverages Substrate’s interoperability, runtime customization, cross-
 * **Integration** with Xode: Enhances Xode's utility by integrating DeFi services, such as liquidity provision and asset swapping, within the Web3 Gaming platform.
 
 <br />
-<br />
 
 # About the Repository
 
@@ -35,7 +34,6 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 ## Running end-to-end tests
 Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-<br />
 <br />
 
 # Further help
