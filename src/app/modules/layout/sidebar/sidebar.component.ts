@@ -18,22 +18,22 @@ export class SidebarComponent {
     // },
     {
       label: 'Dashboard',
-      icon: 'pi pi-fw pi-home',
+      icon: 'custom-icon-dashboard',
       routerLink: '/app/dashboard'
     },
     {
       label: 'Liquidity',
-      icon: 'pi pi-fw pi-database',
+      icon: 'custom-icon-liquidity',
       routerLink: '/app/liquidity'
     },
     {
       label: 'Swap',
-      icon: 'pi pi-fw pi-arrow-right-arrow-left',
+      icon: 'custom-icon-swap',
       routerLink: '/app/swap'
     },
     {
       label: 'Transfer',
-      icon: 'pi pi-fw pi-reply',
+      icon: 'custom-icon-transfer',
       routerLink: '/app/transfer'
     },
   ];

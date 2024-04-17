@@ -31,7 +31,7 @@
     border-radius: 10px;
 }
 
-:host ::ng-deep .sidebar-menus a:active, 
+:host ::ng-deep .sidebar-menus a:active,
 :host ::ng-deep .sidebar-menus a:focus {
     background: #e33768;
 }
@@ -43,4 +43,42 @@
 
 :host ::ng-deep .sidebar-menus a:hover {
     background: #e33768;
+}
+
+:host ::ng-deep {
+    .custom-icon-dashboard {
+        width: 1.5rem;
+        height: 1.5rem;
+        background-image: url("./../../../../assets/sidebar/dashboard.png");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .custom-icon-liquidity {
+        width: 1.5rem;
+        height: 1.5rem;
+        background-image: url("./../../../../assets/sidebar/liquidity.png");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .custom-icon-swap {
+        width: 1.5rem;
+        height: 1.5rem;
+        background-image: url("./../../../../assets/sidebar/swap.png");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .custom-icon-transfer {
+        width: 1.5rem;
+        height: 1.5rem;
+        background-image: url("./../../../../assets/sidebar/transfer.png");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
 }
