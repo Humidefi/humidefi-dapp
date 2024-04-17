@@ -13,8 +13,6 @@ import { ExecuteExtrinsicsStatusModel } from '../../models/execution-extrinsics-
   providers: [MessageService]
 })
 export class TransferComponent {
-  breadcrumbHome: MenuItem | undefined;
-  breadcrumbItems: MenuItem[] | undefined;
 
   constructor(
     public decimalPipe: DecimalPipe,
@@ -135,12 +133,6 @@ export class TransferComponent {
   }
 
   ngOnInit() {
-    this.breadcrumbHome = { icon: 'pi pi-home', routerLink: '/app/dashboard' };
-    this.breadcrumbItems = [
-      { label: 'Dashboard' },
-      { label: 'Transfer' }
-    ];
-
     this.currencies = [
       { name: 'Dollar', code: 'USD' },
       { name: 'Phillipines', code: 'PHP' }

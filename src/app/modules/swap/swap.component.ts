@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { MenuItem } from 'primeng/api';
 import { MessageService } from 'primeng/api';
 import { AssetModel, SelectedAssetModel } from '../../models/assets.model';
 import { AssetsService } from '../../services/assets/assets.service';
@@ -14,8 +13,6 @@ import { ExecuteExtrinsicsStatusModel } from '../../models/execution-extrinsics-
   providers: [MessageService]
 })
 export class SwapComponent {
-  breadcrumbHome: MenuItem | undefined;
-  breadcrumbItems: MenuItem[] | undefined;
 
   constructor(
     public decimalPipe: DecimalPipe,
@@ -150,12 +147,6 @@ export class SwapComponent {
   }
 
   ngOnInit() {
-    this.breadcrumbHome = { icon: 'pi pi-home', routerLink: '/app/dashboard' };
-    this.breadcrumbItems = [
-      { label: 'Dashboard' },
-      { label: 'Swap' }
-    ];
-
     this.currencies = [
       { name: 'Dollar', code: 'USD' },
       { name: 'Phillipines', code: 'PHP' }

@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule, DecimalPipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { ToolbarModule } from 'primeng/toolbar';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputGroupModule } from 'primeng/inputgroup';
@@ -34,7 +33,6 @@ import { SwapComponent } from './swap.component';
     FormsModule,
     ReactiveFormsModule,
     SwapRoutingModule,
-    BreadcrumbModule,
     ToolbarModule,
     InputTextModule,
     InputGroupModule,

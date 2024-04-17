@@ -12,7 +12,6 @@ body {
 .p-menubar {
     position: 'fixed';
     width: '100%';
-    height: 85px;
     border-radius: 0;
 }
 
@@ -20,16 +19,10 @@ body {
     padding: 0 1rem;
 }
 
-.page-title {
-    font-size: 1.5rem;
-    width: 100%;
-    margin-bottom: 10px;
-}
-
 .app-header-page {
-    padding: 20px 25px 20px 25px;
+    padding: 1.5rem;
 }
 
 .app-body-page {
-    padding: 25px;
+    padding: 1.5rem;
 }

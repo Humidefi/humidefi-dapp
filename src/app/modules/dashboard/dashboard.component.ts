@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { MenuItem } from 'primeng/api';
 import { MessageService } from 'primeng/api';
 import { UserAssetModel } from '../../models/user-asset.model';
 import { AssetsService } from '../../services/assets/assets.service';
@@ -15,8 +14,6 @@ import { DexService } from '../../services/dex/dex.service';
   providers: [MessageService]
 })
 export class DashboardComponent {
-  breadcrumbHome: MenuItem | undefined;
-  breadcrumbItems: MenuItem[] | undefined;
 
   constructor(
     public decimalPipe: DecimalPipe,
@@ -110,11 +107,6 @@ export class DashboardComponent {
   }
 
   ngOnInit() {
-    this.breadcrumbHome = { icon: 'pi pi-home', routerLink: '/app/dashboard' };
-    this.breadcrumbItems = [
-      { label: 'Dashboard' }
-    ];
-
     this.currencies = [
       { name: 'Dollar', code: 'USD' },
       { name: 'Phillipines', code: 'PHP' }

@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AssetsModule } from '../assets/assets.module';
 
-import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { ToolbarModule } from 'primeng/toolbar';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputGroupModule } from 'primeng/inputgroup';
@@ -37,7 +36,6 @@ import { LiquidityComponent } from './liquidity.component';
     ReactiveFormsModule,
     AssetsModule,
     LiquidityRoutingModule,
-    BreadcrumbModule,
     ToolbarModule,
     InputTextModule,
     InputGroupModule,

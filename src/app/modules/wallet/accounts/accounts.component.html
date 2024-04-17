@@ -1,12 +1,14 @@
 <div *ngIf="showWalletOptions">
     <div class="flex flex-column gap-2">
-        <button type="button" pButton class="p-button-outlined p-button-rounded p-button-lg p-button-warning" (click)="selectPolkadot()">
+        <button type="button" pButton class="p-button-outlined p-button-lg p-button-warning"
+            style="border-radius: 10px;" (click)="selectPolkadot()">
             <img src="./../../../assets/img/wallet-icons/polkadotjs.png" height="50" />
             &nbsp;
             &nbsp;
             <b>polkadot{{ '{.js}' }}</b>
         </button>
-        <button type="button" pButton class="p-button-outlined p-button-rounded p-button-lg p-button-warning" (click)="selectTalisman()">
+        <button type="button" pButton class="p-button-outlined p-button-lg p-button-warning"
+            style="border-radius: 10px;" (click)="selectTalisman()">
             <img src="./../../../assets/img/wallet-icons/talisman.jpg" height="50" />
             &nbsp;
             &nbsp;

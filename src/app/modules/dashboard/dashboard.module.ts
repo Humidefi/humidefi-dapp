@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule, DecimalPipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { CardModule } from 'primeng/card';
 import { PanelModule } from 'primeng/panel';
 import { TableModule } from 'primeng/table';
@@ -31,7 +30,6 @@ import { DashboardComponent } from './dashboard.component';
     FormsModule,
     ReactiveFormsModule,
     DashboardRoutingModule,
-    BreadcrumbModule,
     CardModule,
     PanelModule,
     TableModule,

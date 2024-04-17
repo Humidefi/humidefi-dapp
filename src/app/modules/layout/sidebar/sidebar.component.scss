@@ -13,7 +13,7 @@
 }
 
 :host ::ng-deep .sidebar-menus {
-    padding-top: 5px;
+    padding: 10px 20px 20px 20px;
     margin-top: 10px;
     width: 100%;
     background: #F43C70;
@@ -21,9 +21,14 @@
     border: none;
 }
 
+:host ::ng-deep .p-menuitem-content {
+    border-radius: 10px;
+}
+
 :host ::ng-deep .sidebar-menus a {
     background: #F43C70;
-    padding: 20px 0px 20px 35px;
+    padding: 17px;
+    border-radius: 10px;
 }
 
 :host ::ng-deep .sidebar-menus a:active, 

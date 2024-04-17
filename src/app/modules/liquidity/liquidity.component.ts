@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { MenuItem } from 'primeng/api';
 import { MessageService } from 'primeng/api';
 import { AssetModel, SelectedAssetModel } from '../../models/assets.model';
 import { AssetsService } from '../../services/assets/assets.service';
@@ -16,8 +15,6 @@ import { ExecuteExtrinsicsStatusModel } from '../../models/execution-extrinsics-
   providers: [MessageService]
 })
 export class LiquidityComponent {
-  breadcrumbHome: MenuItem | undefined;
-  breadcrumbItems: MenuItem[] | undefined;
 
   constructor(
     public decimalPipe: DecimalPipe,
@@ -144,12 +141,6 @@ export class LiquidityComponent {
   }
 
   ngOnInit() {
-    this.breadcrumbHome = { icon: 'pi pi-home', routerLink: '/app/dashboard' };
-    this.breadcrumbItems = [
-      { label: 'Dashboard' },
-      { label: 'Liquidity' },
-    ];
-
     this.currencies = [
       { name: 'Dollar', code: 'USD' },
       { name: 'Phillipines', code: 'PHP' }
